@@ -1,6 +1,7 @@
 package com.cgsti.cgsti.services;
 
 import com.cgsti.cgsti.Mappers.ReservaMapper;
+import com.cgsti.cgsti.dto.ReservaPutDTO;
 import com.cgsti.cgsti.dto.ReservaRequestDTO;
 import com.cgsti.cgsti.dto.ReservaResponseDTO;
 import com.cgsti.cgsti.models.Equipamento;
@@ -9,8 +10,10 @@ import com.cgsti.cgsti.models.StatusEquipamento;
 import com.cgsti.cgsti.repository.EquipamentoRepository;
 import com.cgsti.cgsti.repository.ReservaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +49,26 @@ public class ReservaService {
         }
 
         return reservaMapper.reservaParaReservaResponse(savedReserva);
+    }
+
+    public ReservaResponseDTO atualizarReserva(ReservaPutDTO reservaPutDTO, Long id) {
+        Reserva reservaExistente = reservaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reserva não encontrada com o ID: " + id));
+
+        reservaExistente.setResponsavelSetor(reservaPutDTO.getResponsavelSetor());
+        reservaExistente.setDataSolicitacao(reservaPutDTO.getDataSolicitacao());
+        reservaExistente.setDataRetirada(reservaPutDTO.getDataRetirada());
+        reservaExistente.setDataEntrega(reservaPutDTO.getDataEntrega());
+        reservaExistente.setPeriodo(reservaPutDTO.getPeriodo());
+        reservaExistente.setLocalEvento(reservaPutDTO.getLocalEvento());
+        reservaExistente.setTelefone(reservaPutDTO.getTelefone());
+
+        List<Equipamento> equipamentos = equipamentoRepository.findAllById(reservaPutDTO.getEquipamentosIds());
+        reservaExistente.setEquipamentos(equipamentos);
+
+        Reserva reservaAtualizada = reservaRepository.save(reservaExistente);
+
+        return reservaMapper.reservaParaReservaResponse(reservaAtualizada);
     }
 
     @Transactional

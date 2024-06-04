@@ -1,5 +1,6 @@
 package com.cgsti.cgsti.controllers;
 
+import com.cgsti.cgsti.dto.ReservaPutDTO;
 import com.cgsti.cgsti.dto.ReservaRequestDTO;
 import com.cgsti.cgsti.dto.ReservaResponseDTO;
 import com.cgsti.cgsti.services.ReservaService;
@@ -39,6 +40,14 @@ public class ReservaController {
     public ResponseEntity<ReservaResponseDTO> save(@RequestBody ReservaRequestDTO reservaRequestDTO) {
         ReservaResponseDTO reserva = reservaService.cadastrarReserva(reservaRequestDTO);
         return ResponseEntity.status(201).body(reserva);
+    }
+
+    @Operation(summary = "Altera uma reserva")
+    @PutMapping(path = "/{id}", consumes = "application/json")
+    public ResponseEntity<ReservaResponseDTO> atualizarReserva(@RequestBody ReservaPutDTO reservaPutDTO,
+                                                               @PathVariable Long id) {
+
+        return ResponseEntity.ok(reservaService.atualizarReserva(reservaPutDTO, id));
     }
 
     @Operation(summary = "Deleta uma reserva")

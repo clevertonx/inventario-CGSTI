@@ -4,6 +4,7 @@ import com.cgsti.cgsti.Mappers.EquipamentoMapper;
 import com.cgsti.cgsti.dto.EquipamentoPutDTO;
 import com.cgsti.cgsti.dto.EquipamentoRequestDTO;
 import com.cgsti.cgsti.dto.EquipamentoResponseDTO;
+import com.cgsti.cgsti.exceptions.EquipamentoEmprestadoException;
 import com.cgsti.cgsti.models.Equipamento;
 import com.cgsti.cgsti.models.StatusEquipamento;
 import com.cgsti.cgsti.repository.EquipamentoRepository;
@@ -86,8 +87,14 @@ public class EquipamentoService {
     }
 
     public void excluirEquipamento(Long id) {
+        Equipamento equipamento = equipamentoRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Equipamento não encontrado"));
+
+        if (equipamento.getStatus() == StatusEquipamento.EMPRESTADO) {
+            throw new EquipamentoEmprestadoException();
+        }
+
         equipamentoRepository.deleteById(id);
     }
-
 
 }
