@@ -1,5 +1,6 @@
 package com.cgsti.cgsti.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,28 @@ public class Equipamento {
     private Long id;
     private String nome;
     private String tipo;
+    @Nullable
+    private String numeroSerie;
+    @Nullable
+    private String marca;
+    @Nullable
+    private String modelo;
+    @Nullable
+    private String hdSsd;
+    @Nullable
+    private String processador;
+    @Nullable
+    private String placaDeVideo;
+    @Nullable
+    private String memoriaRam;
+    @Nullable
+    private String sistemaOperacional;
+    @Nullable
+    private String arquitetura;
+    @Nullable
+    private String enderecoMac;
+    @Nullable
+    private String etiqueta;
 
     @Enumerated(EnumType.STRING)
     private StatusEquipamento status;

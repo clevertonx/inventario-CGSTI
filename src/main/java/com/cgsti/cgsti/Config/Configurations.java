@@ -33,8 +33,8 @@ public class Configurations {
                     req.requestMatchers(HttpMethod.PUT, "/reservas/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/swagger-ui/**", "/v3/api-docs/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "http://localhost:3000").permitAll();
-                    req.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "http://127.0.0.1:5502/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "http://127.0.0.1:8080/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "http://127.0.0.1:5502/**").permitAll();
                     req.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     req.anyRequest().authenticated();

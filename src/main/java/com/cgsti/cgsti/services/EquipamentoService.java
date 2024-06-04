@@ -41,20 +41,16 @@ public class EquipamentoService {
         List<Equipamento> equipamentosDisponiveis = new ArrayList<>();
 
         for (Equipamento equipamento : equipamentos) {
-            // Verifica se o equipamento está vinculado a alguma reserva
             boolean emprestado = equipamento.getReserva() != null;
 
-            // Atualiza o status do equipamento com base na condição
             if (emprestado) {
                 equipamento.setStatus(StatusEquipamento.EMPRESTADO);
             } else {
                 equipamento.setStatus(StatusEquipamento.DISPONIVEL);
             }
 
-            // Atualiza o equipamento no banco de dados
             equipamentoRepository.save(equipamento);
 
-            // Adiciona o equipamento atualizado à lista de equipamentos disponíveis
             equipamentosDisponiveis.add(equipamento);
         }
 
@@ -64,7 +60,7 @@ public class EquipamentoService {
 
     public EquipamentoResponseDTO cadastrarEquipamento(EquipamentoRequestDTO equipamentoRequestDTO) {
         Equipamento equipamento = equipamentoMapper.equipamentoRequestParaEquipamento(equipamentoRequestDTO);
-        equipamento.setStatus(StatusEquipamento.DISPONIVEL);  // Define o status como DISPONIVEL
+        equipamento.setStatus(StatusEquipamento.DISPONIVEL);
         Equipamento savedEquipamento = equipamentoRepository.save(equipamento);
         return equipamentoMapper.equipamentoParaEquipamentoResponse(savedEquipamento);
     }
