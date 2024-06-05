@@ -23,6 +23,9 @@ public class Configurations {
                 .authorizeHttpRequests(req -> {
 
                     req.requestMatchers(HttpMethod.GET, "/reservas/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/reservaHistorico/**").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "/reservaHistorico/**").permitAll();
+                    req.requestMatchers(HttpMethod.DELETE, "/reservaHistorico/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/reservas/**").permitAll();
                     req.requestMatchers(HttpMethod.PUT, "/reservas/**").permitAll();
                     req.requestMatchers(HttpMethod.DELETE, "/reservas/**").permitAll();

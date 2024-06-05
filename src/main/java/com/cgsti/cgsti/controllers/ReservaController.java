@@ -50,6 +50,14 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.atualizarReserva(reservaPutDTO, id));
     }
 
+    @Operation(summary = "Conclui uma reserva pelo ID")
+    @PutMapping("/concluir/{id}")
+    public ResponseEntity<ReservaResponseDTO> concluirReserva(@PathVariable Long id) {
+        ReservaResponseDTO response = reservaService.concluirReserva(id);
+        return ResponseEntity.ok(response);
+    }
+
+
     @Operation(summary = "Deleta uma reserva")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {

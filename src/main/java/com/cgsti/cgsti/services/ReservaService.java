@@ -4,17 +4,19 @@ import com.cgsti.cgsti.Mappers.ReservaMapper;
 import com.cgsti.cgsti.dto.ReservaPutDTO;
 import com.cgsti.cgsti.dto.ReservaRequestDTO;
 import com.cgsti.cgsti.dto.ReservaResponseDTO;
-import com.cgsti.cgsti.models.Equipamento;
-import com.cgsti.cgsti.models.Reserva;
-import com.cgsti.cgsti.models.StatusEquipamento;
+import com.cgsti.cgsti.models.*;
 import com.cgsti.cgsti.repository.EquipamentoRepository;
+import com.cgsti.cgsti.repository.ReservaHistoricoRepository;
 import com.cgsti.cgsti.repository.ReservaRepository;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class ReservaService {
     private final ReservaRepository reservaRepository;
     private final ReservaMapper reservaMapper;
     private final EquipamentoRepository equipamentoRepository;
+    private final ReservaHistoricoRepository reservaHistoricoRepository;
 
     public List<ReservaResponseDTO> buscarTodasReservas() {
         List<Reserva> reservas = reservaRepository.findAll();
@@ -40,6 +43,7 @@ public class ReservaService {
     @Transactional
     public ReservaResponseDTO cadastrarReserva(ReservaRequestDTO reservaRequestDTO) {
         Reserva reserva = reservaMapper.reservaRequestParaReserva(reservaRequestDTO);
+        reserva.setStatusReserva(StatusReserva.ATIVA);
         Reserva savedReserva = reservaRepository.save(reserva);
 
         List<Equipamento> equipamentos = savedReserva.getEquipamentos();
@@ -83,5 +87,40 @@ public class ReservaService {
         }
 
         reservaRepository.deleteById(id);
+    }
+
+    @Transactional
+    public ReservaResponseDTO concluirReserva(Long id) {
+        Reserva reserva = reservaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Reserva não encontrada com o ID fornecido: " + id));
+
+        if (reserva.getStatusReserva() == StatusReserva.CONCLUIDA) {
+            throw new IllegalStateException("A reserva já está concluída.");
+        }
+
+        reserva.setStatusReserva(StatusReserva.CONCLUIDA);
+
+        ReservaHistorico reservaHistorico = new ReservaHistorico();
+        reservaHistorico.setResponsavelSetor(reserva.getResponsavelSetor());
+        reservaHistorico.setDataSolicitacao(reserva.getDataSolicitacao());
+        reservaHistorico.setDataRetirada(reserva.getDataRetirada());
+        reservaHistorico.setDataDevolucao(LocalDate.now());
+        reservaHistorico.setDataEntrega(reserva.getDataEntrega());
+        reservaHistorico.setPeriodo(reserva.getPeriodo());
+        reservaHistorico.setLocalEvento(reserva.getLocalEvento());
+        reservaHistorico.setTelefone(reserva.getTelefone());
+
+
+
+
+        for (Equipamento equipamento : reserva.getEquipamentos()) {
+            equipamento.setReserva(null);
+            equipamento.setStatus(StatusEquipamento.DISPONIVEL);
+            equipamentoRepository.save(equipamento);
+        }
+        reservaHistoricoRepository.save(reservaHistorico);
+        reservaRepository.delete(reserva);
+
+        return new ReservaResponseDTO();
     }
 }

@@ -1,28 +1,35 @@
-package com.cgsti.cgsti.dto;
+package com.cgsti.cgsti.models;
 
-import com.cgsti.cgsti.models.Periodo;
-import com.cgsti.cgsti.models.StatusReserva;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservaResponseDTO {
+public class ReservaHistorico {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String responsavelSetor;
     private LocalDate dataSolicitacao;
     private LocalDate dataRetirada;
     private LocalDate dataEntrega;
     private LocalDate dataDevolucao;
+
+    @Enumerated(EnumType.STRING)
     private Periodo periodo;
+    @Enumerated(EnumType.STRING)
     private StatusReserva statusReserva;
+
     private String localEvento;
     private String telefone;
-    private List<Long> equipamentosIds;
 
 }

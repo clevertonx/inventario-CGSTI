@@ -7,11 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservaResponseDTO {
+public class ReservaHistoricoResponseDTO {
 
     private long id;
     private String responsavelSetor;
@@ -23,6 +23,4 @@ public class ReservaResponseDTO {
     private StatusReserva statusReserva;
     private String localEvento;
     private String telefone;
-    private List<Long> equipamentosIds;
-
 }

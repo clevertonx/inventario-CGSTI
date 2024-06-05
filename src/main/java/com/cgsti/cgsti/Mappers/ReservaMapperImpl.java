@@ -5,8 +5,8 @@ import com.cgsti.cgsti.dto.ReservaRequestDTO;
 import com.cgsti.cgsti.dto.ReservaResponseDTO;
 import com.cgsti.cgsti.models.Equipamento;
 import com.cgsti.cgsti.models.Reserva;
+import com.cgsti.cgsti.models.ReservaHistorico;
 import com.cgsti.cgsti.repository.EquipamentoRepository;
-import com.cgsti.cgsti.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +32,9 @@ public class ReservaMapperImpl implements ReservaMapper{
                 reservaRequestDTO.getDataSolicitacao(),
                 reservaRequestDTO.getDataRetirada(),
                 reservaRequestDTO.getDataEntrega(),
+                null,
                 reservaRequestDTO.getPeriodo(),
+                null,
                 reservaRequestDTO.getLocalEvento(),
                 reservaRequestDTO.getTelefone(),
                 equipamentos
@@ -52,7 +54,9 @@ public class ReservaMapperImpl implements ReservaMapper{
                 reserva.getDataSolicitacao(),
                 reserva.getDataRetirada(),
                 reserva.getDataEntrega(),
+                reserva.getDataDevolucao(),
                 reserva.getPeriodo(),
+                reserva.getStatusReserva(),
                 reserva.getLocalEvento(),
                 reserva.getTelefone(),
                 equipamentosIds
@@ -61,7 +65,7 @@ public class ReservaMapperImpl implements ReservaMapper{
 
 
     @Override
-    public Collection<ReservaResponseDTO> reservasParaReservasResponse(Collection<Reserva> reservas) {
+    public Collection<ReservaResponseDTO> reservasParaReservasResponse(List<Reserva> reservas) {
         Collection<ReservaResponseDTO> reservasMapeadas = new ArrayList<>();
         for (Reserva reserva : reservas) {
             reservasMapeadas.add(reservaParaReservaResponse(reserva));
