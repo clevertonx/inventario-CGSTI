@@ -1,5 +1,6 @@
 package com.cgsti.cgsti.dto;
 
+import com.cgsti.cgsti.models.TipoEquipamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class EquipamentoRequestDTO {
 
     private String nome;
-    private String tipo;
+    private TipoEquipamento tipoEquipamento;
     private String numeroSerie;
     private String marca;
     private String modelo;

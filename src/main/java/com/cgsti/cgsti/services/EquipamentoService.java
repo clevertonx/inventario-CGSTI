@@ -76,7 +76,7 @@ public class EquipamentoService {
         }
         Equipamento equipamento = equipamentoOptional.get();
         equipamento.setNome(equipamentoPutDTO.getNome());
-        equipamento.setTipo(equipamentoPutDTO.getTipo());
+        equipamento.setTipoEquipamento(equipamentoPutDTO.getTipoEquipamento());
         equipamentoRepository.save(equipamento);
 
         return equipamentoMapper.equipamentoParaEquipamentoResponse(equipamento);

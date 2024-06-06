@@ -1,5 +1,6 @@
 package com.cgsti.cgsti.dto;
 
+import com.cgsti.cgsti.models.TipoEquipamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,5 +12,5 @@ public class EquipamentoPutDTO {
 
     private Long id;
     private String nome;
-    private String tipo;
+    private TipoEquipamento tipoEquipamento;
 }

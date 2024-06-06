@@ -21,7 +21,7 @@ public class EquipamentoMapperImpl implements EquipamentoMapper{
         return new Equipamento(
                 null,
                 equipamentoRequestDTO.getNome(),
-                equipamentoRequestDTO.getTipo(),
+                equipamentoRequestDTO.getTipoEquipamento(),
                 equipamentoRequestDTO.getNumeroSerie(),
                 equipamentoRequestDTO.getMarca(),
                 equipamentoRequestDTO.getModelo(),
@@ -41,7 +41,7 @@ public class EquipamentoMapperImpl implements EquipamentoMapper{
     @Override
     public EquipamentoResponseDTO equipamentoParaEquipamentoResponse(Equipamento equipamento) {
         return new EquipamentoResponseDTO(equipamento.getId(), equipamento.getNome(),
-                equipamento.getTipo(), equipamento.getStatus(),
+                equipamento.getTipoEquipamento(), equipamento.getStatus(),
                 equipamento.getNumeroSerie(), equipamento.getMarca(),
                 equipamento.getModelo(), equipamento.getHdSsd(),
                 equipamento.getProcessador(), equipamento.getPlacaDeVideo(),

@@ -15,7 +15,10 @@ public class Equipamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String tipo;
+
+    @Enumerated(EnumType.STRING)
+    private TipoEquipamento tipoEquipamento;
+
     @Nullable
     private String numeroSerie;
     @Nullable
@@ -46,9 +49,9 @@ public class Equipamento {
     @JoinColumn(name = "reserva_id", nullable = true)
     private Reserva reserva;
 
-    public Equipamento(String nome, String tipo, StatusEquipamento status) {
+    public Equipamento(String nome, TipoEquipamento tipoEquipamento, StatusEquipamento status) {
         this.nome = nome;
-        this.tipo = tipo;
+        this.tipoEquipamento = tipoEquipamento;
         this.status = status;
     }
 }
