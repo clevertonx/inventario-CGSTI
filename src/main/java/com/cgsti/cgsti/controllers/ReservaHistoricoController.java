@@ -1,9 +1,7 @@
 package com.cgsti.cgsti.controllers;
 
 import com.cgsti.cgsti.Mappers.ReservaHistoricoMapper;
-import com.cgsti.cgsti.Mappers.ReservaMapper;
 import com.cgsti.cgsti.dto.ReservaHistoricoResponseDTO;
-import com.cgsti.cgsti.dto.ReservaResponseDTO;
 import com.cgsti.cgsti.models.ReservaHistorico;
 import com.cgsti.cgsti.repository.ReservaHistoricoRepository;
 import com.cgsti.cgsti.services.ReservaHistoricoService;
@@ -39,7 +37,7 @@ public class ReservaHistoricoController {
     public ResponseEntity<Page<ReservaHistoricoResponseDTO>> buscarTodos(@RequestParam(defaultValue = "0") int page,
                                                                          @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<ReservaHistorico> reservaHistoricoPage = reservaHistoricoRepository.findAll(pageable);
+        Page<ReservaHistorico> reservaHistoricoPage = reservaHistoricoRepository.findAllByOrderByDataSolicitacaoDesc(pageable);
         Page<ReservaHistoricoResponseDTO> reservasHistoricoResponsePage = reservaHistoricoPage.map(reservaHistoricoMapper::reservaHistoricoParaReservaResponse);
         return ResponseEntity.ok().body(reservasHistoricoResponsePage);
     }
