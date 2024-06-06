@@ -24,6 +24,7 @@ public class Configurations {
 
                     req.requestMatchers(HttpMethod.GET, "/reservas/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/reservaHistorico/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/reservaHistorico/paginados").permitAll();
                     req.requestMatchers(HttpMethod.PUT, "/reservaHistorico/**").permitAll();
                     req.requestMatchers(HttpMethod.DELETE, "/reservaHistorico/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/reservas/**").permitAll();
