@@ -43,14 +43,14 @@ public class Configurations {
                     req.requestMatchers(HttpMethod.GET, "http://127.0.0.1:5502/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "http://127.0.0.1:8080/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "http://127.0.0.1:5502/**").permitAll();
-                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:8080/**").permitAll();
-                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:8080/**").permitAll();
-                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:8080/**").permitAll();
-                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:8080/**").permitAll();
-                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:5500/**").permitAll();
-                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:5500/**").permitAll();
-                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:5500/**").permitAll();
-                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:5500/**").permitAll();
+//                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:8080/**").permitAll();
+//                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:8080/**").permitAll();
+//                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:8080/**").permitAll();
+//                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:8080/**").permitAll();
+//                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:5500/**").permitAll();
+//                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:5500/**").permitAll();
+//                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:5500/**").permitAll();
+//                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:5500/**").permitAll();
                     req.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     req.anyRequest().authenticated();
                 })
