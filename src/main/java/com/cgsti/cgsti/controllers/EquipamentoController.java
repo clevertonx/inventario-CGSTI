@@ -3,6 +3,7 @@ package com.cgsti.cgsti.controllers;
 import com.cgsti.cgsti.dto.EquipamentoPutDTO;
 import com.cgsti.cgsti.dto.EquipamentoRequestDTO;
 import com.cgsti.cgsti.dto.EquipamentoResponseDTO;
+import com.cgsti.cgsti.exceptions.EquipamentoNaoEncontradoException;
 import com.cgsti.cgsti.services.EquipamentoService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +47,7 @@ public class EquipamentoController {
     @Operation(summary = "Altera um equipamento")
     @PutMapping(path = "/{id}", consumes = "application/json")
     public ResponseEntity<EquipamentoResponseDTO> atualizarEquipamento(@RequestBody EquipamentoPutDTO equipamentoPutDTO,
-                                                               @PathVariable Long id) {
+                                                               @PathVariable Long id) throws EquipamentoNaoEncontradoException {
 
         return ResponseEntity.ok(equipamentoService.atualizarEquipamento(equipamentoPutDTO, id));
     }

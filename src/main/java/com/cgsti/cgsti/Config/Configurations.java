@@ -9,11 +9,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebSecurity
-@EnableWebMvc
 public class Configurations {
 
 
@@ -43,14 +41,30 @@ public class Configurations {
                     req.requestMatchers(HttpMethod.GET, "http://127.0.0.1:5502/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "http://127.0.0.1:8080/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "http://127.0.0.1:5502/**").permitAll();
-//                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:8080/**").permitAll();
-//                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:8080/**").permitAll();
-//                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:8080/**").permitAll();
-//                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:8080/**").permitAll();
-//                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:5500/**").permitAll();
-//                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:5500/**").permitAll();
-//                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:5500/**").permitAll();
-//                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:5500/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:8080/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:8080/**").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:8080/**").permitAll();
+                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:8080/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "http://10.8.4.71:5500/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:5500/**").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "http://10.8.4.71:5500/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "http://10.8.4.71:8080/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "http://localhost:8080/**").permitAll();
+                    req.requestMatchers(HttpMethod.DELETE, "http://10.8.4.71:5500/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "http://localhost:8080/index.html").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "http://localhost:8080/index.html").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "http://localhost:8080/inventario.html").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "http://localhost:8080/inventario.html").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "http://localhost:8080/inventario.html").permitAll();
+                    req.requestMatchers(HttpMethod.DELETE, "http://localhost:8080/inventario.html").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "http://localhost:8080/inventario.html").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/static/index.html").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "http://localhost:8080/inventario.html").permitAll();
+                    req.requestMatchers(HttpMethod.DELETE, "http://localhost:8080/inventario.html").permitAll();
+                    req.requestMatchers( "/static/**","/js/**", "/css/**", "/fonts/**").permitAll();
+                    req.requestMatchers("/static/**", "/index.html", "/inventario.html", "/js/**", "/css/**", "/fonts/**").permitAll();
+                    req.requestMatchers( "/**").permitAll();
+
                     req.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     req.anyRequest().authenticated();
                 })

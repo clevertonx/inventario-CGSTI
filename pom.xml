@@ -11,6 +11,7 @@
 	<groupId>com.cgsti</groupId>
 	<artifactId>cgsti</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>cgsti</name>
 	<description>Projeto inventario cgsti</description>
 	<properties>
@@ -71,6 +72,11 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>3.3.0</version>
 		</dependency>
 
 	</dependencies>

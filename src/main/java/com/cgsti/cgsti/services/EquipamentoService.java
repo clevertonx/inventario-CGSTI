@@ -5,6 +5,7 @@ import com.cgsti.cgsti.dto.EquipamentoPutDTO;
 import com.cgsti.cgsti.dto.EquipamentoRequestDTO;
 import com.cgsti.cgsti.dto.EquipamentoResponseDTO;
 import com.cgsti.cgsti.exceptions.EquipamentoEmprestadoException;
+import com.cgsti.cgsti.exceptions.EquipamentoNaoEncontradoException;
 import com.cgsti.cgsti.models.Equipamento;
 import com.cgsti.cgsti.models.StatusEquipamento;
 import com.cgsti.cgsti.repository.EquipamentoRepository;
@@ -68,15 +69,27 @@ public class EquipamentoService {
 
 
 
-    public EquipamentoResponseDTO atualizarEquipamento(EquipamentoPutDTO equipamentoPutDTO, long id) {
-
+    public EquipamentoResponseDTO atualizarEquipamento(EquipamentoPutDTO equipamentoPutDTO, Long id) throws EquipamentoNaoEncontradoException {
         Optional<Equipamento> equipamentoOptional = equipamentoRepository.findById(id);
         if (equipamentoOptional.isEmpty()) {
-            throw new NoSuchElementException();
+            throw new EquipamentoNaoEncontradoException("Equipamento não encontrado com o ID: " + id);
         }
+
         Equipamento equipamento = equipamentoOptional.get();
         equipamento.setNome(equipamentoPutDTO.getNome());
         equipamento.setTipoEquipamento(equipamentoPutDTO.getTipoEquipamento());
+        equipamento.setNumeroSerie(equipamentoPutDTO.getNumeroSerie());
+        equipamento.setMarca(equipamentoPutDTO.getMarca());
+        equipamento.setModelo(equipamentoPutDTO.getModelo());
+        equipamento.setHdSsd(equipamentoPutDTO.getHdSsd());
+        equipamento.setProcessador(equipamentoPutDTO.getProcessador());
+        equipamento.setPlacaDeVideo(equipamentoPutDTO.getPlacaDeVideo());
+        equipamento.setMemoriaRam(equipamentoPutDTO.getMemoriaRam());
+        equipamento.setSistemaOperacional(equipamentoPutDTO.getSistemaOperacional());
+        equipamento.setArquitetura(equipamentoPutDTO.getArquitetura());
+        equipamento.setEnderecoMac(equipamentoPutDTO.getEnderecoMac());
+        equipamento.setEtiqueta(equipamentoPutDTO.getEtiqueta());
+
         equipamentoRepository.save(equipamento);
 
         return equipamentoMapper.equipamentoParaEquipamentoResponse(equipamento);
